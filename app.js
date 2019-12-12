@@ -1,5 +1,5 @@
 const {executeAsync} = require("./async.js");
 
 executeAsync(function() {
-	return 3;
+	return "done";
 }).then(console.log).catch(console.error);

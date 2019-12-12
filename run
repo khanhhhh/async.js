@@ -1,0 +1,2 @@
+#!/usr/bin/env sh
+node --experimental-worker app.js

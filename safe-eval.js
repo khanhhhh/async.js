@@ -1,6 +1,5 @@
 const vm = require('vm')
-
-module.exports = {safeEval: function(code, context, opts) {
+const safeEval = function(code, context, opts) {
   const sandbox = {}
   const resultKey = 'SAFE_EVAL_' + Math.floor(Math.random() * 1000000)
   sandbox[resultKey] = {}
@@ -23,4 +22,5 @@ module.exports = {safeEval: function(code, context, opts) {
   }
   vm.runInNewContext(code, sandbox, opts)
   return sandbox[resultKey]
-}}
+};
+module.exports = {safeEval};
