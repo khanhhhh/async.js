@@ -57,7 +57,7 @@ for (let t=0; t<num_thread; t++)
 
 // too many tasks
 const num_threads = 1;
-const num_tasks = 100;
+const num_tasks = 10;
 const data_init = function(range = 0) {
   let data = [];
   for (let i=0; i<range; i++)

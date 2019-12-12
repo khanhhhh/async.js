@@ -8,4 +8,4 @@ Execute js function in another thread
 
 - `async.js`: runs a pure function in a different thread, returns a Promise
 
-- `map.js`: maps with fixed number of threads
+- `map.js`: maps with fixed number of threads (assume mapping is very expensive compared to thread spawning cost)
