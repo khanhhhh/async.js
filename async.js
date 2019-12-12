@@ -1,10 +1,13 @@
 const {isMainThread, Worker, workerData, parentPort} = require("worker_threads");
 const {safeEval} = require("./safe-eval.js");
 if (isMainThread) {
-  const executeAsync = function(functionObject) {
+  const executeAsync = function(functionObject, ...argsObject) {
     return new Promise(function(resolve, reject) {
       const worker = new Worker(__filename, {
-        workerData: {functionString: functionObject.toString()}
+        workerData: {
+		functionString: functionObject.toString(),
+		argsObject: [...argsObject],
+	}
       });
       worker.on("message", resolve);
       worker.on("error", reject);
@@ -17,7 +20,7 @@ if (isMainThread) {
   };
   module.exports = {executeAsync};
 } else {
-  const {functionString} = workerData;
+  const {functionString, argsObject} = workerData;
   const functionObject = safeEval(functionString);
-  parentPort.postMessage(functionObject());
+  parentPort.postMessage(functionObject(...argsObject));
 }
