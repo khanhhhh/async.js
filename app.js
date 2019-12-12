@@ -1,4 +1,6 @@
+const {safeEval} = require("./safe-eval.js");
 const {executeAsync} = require("./async.js");
+const {mapParallel} = require("./map.js");
 /*
 // basic
 executeAsync(function(a, b) {
@@ -20,7 +22,7 @@ for (let i=0; i<10; i++)
 
   }, Math.random() * 200 * i);
 */
-
+/*
 // too many tasks
 const num_thread = 4;
 const num_task = 100;
@@ -51,13 +53,23 @@ for (let t=0; t<num_thread; t++)
   routineAsync(function() {
     console.log(data);
   });
+*/
 
+// too many tasks
+const num_threads = 1;
+const num_tasks = 100;
+const data_init = function(range = 0) {
+  let data = [];
+  for (let i=0; i<range; i++)
+    data.push(i);
+  return data;
+};
+let data = data_init(num_tasks);
+const mapping = function(item) {
+  return 2*item;
+}
 
-
-
-
-
-
+mapParallel(data, mapping, console.log, num_threads);
 
 
 
