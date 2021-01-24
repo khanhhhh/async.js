@@ -33,9 +33,11 @@ const Pool = class {
             const withExec = function (resolve) {
                 return function(data) {
                     resolve(data);
+                    self.current_num_threads--;
                     self._exec();
                 }
             };
+            self.current_num_threads++;
             execAsync(func, ...args).then(withExec(resolve)).catch(withExec(reject));
         }
     }
